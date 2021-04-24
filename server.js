@@ -15,7 +15,7 @@ const connection = mysql.createConnection({
       init();
   })
 
-  const initQs = { name: 'action', type: 'list', message: 'Choose an available option from the following list: ',
+  const initQs = { name: 'selection', type: 'list', message: 'Choose an available option from the following list: ',
    choices: [
        'View all employees',
        'View all employees by department',
@@ -36,6 +36,72 @@ const connection = mysql.createConnection({
 
   const init = () => {
     inquirer
-        .prompt (initQs);
+        .prompt (initQs)
+        .then((data) => {
+            switch (data.selection) {
+                case 'View all employees':
+                    viewEmployees();
+                    break;
+
+                case 'View all employees by department':
+                    viewEmpByDep();
+                    break;
+
+                case 'View all employees by manager':
+                    viewEmpByMan();
+                    break;
+
+                case 'Add employee':
+                    addEmployee();
+                    break;
+
+                case 'Remove employee':
+                    removeEmployee();
+                    break;
+
+                case 'Update employee role':
+                    updateEmpRole();
+                    break;
+                    
+                case 'Update employee manager':
+                    updateEmpMan();
+                    break;
+
+                case 'View all roles':
+                    viewRoles();
+                    break;
+
+                case 'Add role':
+                    addRole();
+                    break;
+
+                case 'Remove role':
+                    removeRole();
+                    break;
+
+                case 'View all departments':
+                    viewDepartments();
+                    break;
+
+                case 'Add department':
+                    addDepartment ();
+                    break;                  
+                    
+                case 'Remove department':
+                    removeDepartment();
+                    break;
+
+                case 'View budget by department':
+                    viewBudget();
+                    break;
+
+                case 'Exit':
+                    break; 
+
+                default:
+                    throw Error;
+            }
+        });
+
   }
 
