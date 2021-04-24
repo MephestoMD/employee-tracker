@@ -1,40 +1,32 @@
 const mysql = require('mysql');
 const inquirer = require('inquirer');
+const connection = require('./config/connection');
 
-const connection = mysql.createConnection({
-    host: 'localhost',  
-    port: 3306,
-    user: 'root',
-    password: 'W@tbh03890389',
-    database: 'office_DB',
-  });
+connection.connect((err) => {
+    if(err) throw err;
+    init();
+});
 
-  connection.connect((err) => {
-      if(err) throw err;
-      console.log(err);
-      init();
-  })
+const initQs = { name: 'selection', type: 'list', message: 'Choose an available option from the following list: ',
+choices: [
+    'View all employees',
+    'View all employees by department',
+    'View all employees by manager',
+    'Add employee',
+    'Remove employee',
+    'Update employee role',
+    'Update employee manager',
+    'View all roles',
+    'Add role',
+    'Remove role',
+    'View all departments',
+    'Add department',
+    'Remove department',
+    'View budget by department',
+    'Exit'
+]}
 
-  const initQs = { name: 'selection', type: 'list', message: 'Choose an available option from the following list: ',
-   choices: [
-       'View all employees',
-       'View all employees by department',
-       'View all employees by manager',
-       'Add employee',
-       'Remove employee',
-       'Update employee role',
-       'Update employee manager',
-       'View all roles',
-       'Add role',
-       'Remove role',
-       'View all departments',
-       'Add department',
-       'Remove department',
-       'View budget by department',
-       'Exit'
-   ]}
-
-  const init = () => {
+const init = () => {
     inquirer
         .prompt (initQs)
         .then((data) => {
@@ -96,67 +88,68 @@ const connection = mysql.createConnection({
                     break;
 
                 case 'Exit':
-                    break; 
+                    connection.end();
+                    break;
 
                 default:
                     throw Error;
             }
         });
 
-  }
+};
 
 const viewEmployees = () => {
-
-}
+    const query = 'SELECT '
+};
 
 const viewEmpByDep = () => {
-    
-}
+
+};
 
 const viewEmpByMan = () => {
-    
-}
+
+};
 
 const addEmployee = () => {
-    
-}
+
+};
 
 const removeEmployee = () => {
-    
-}
+
+};
 
 const updateEmpRole = () => {
-    
-}
+
+};
 
 const updateEmpMan = () => {
-    
-}
+
+};
 
 const viewRoles = () => {
-    
-}
+
+};
 
 const addRole = () => {
-    
-}
+
+};
 
 const removeRole = () => {
-    
-}
+
+};
 
 const viewDepartments = () => {
-    
-}
+
+};
 
 const addDepartment = () => {
-    
-}
+
+};
 
 const removeDepartment = () => {
-    
-}
+
+};
 
 const viewBudget = () => {
-    
-}
+
+};
