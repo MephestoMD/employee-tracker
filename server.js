@@ -1,6 +1,8 @@
 const mysql = require('mysql');
 const inquirer = require('inquirer');
 const connection = require('./config/connection');
+const cTable = require('console.table');
+const Table = require('ascii-art-table');
 
 connection.connect((err) => {
     if(err) throw err;
@@ -27,6 +29,12 @@ choices: [
 ]}
 
 const init = () => {
+    Table.create({
+        width : 80,
+        data : [ 'Employee Manager' ]
+    }, function(rendered){
+        // use rendered text
+    });
     inquirer
         .prompt (initQs)
         .then((data) => {
@@ -99,7 +107,13 @@ const init = () => {
 };
 
 const viewEmployees = () => {
-    const query = 'SELECT '
+
+    const query = 'SELECT * from employee';
+    connection.query(query, (err, res) => {
+        if (err) throw err;
+        console.table(res)
+        init();
+    })
 };
 
 const viewEmpByDep = () => {
@@ -128,6 +142,12 @@ const updateEmpMan = () => {
 
 const viewRoles = () => {
 
+    const query = 'SELECT * from role';
+    connection.query(query, (err, res) => {
+        if (err) throw err;
+        console.table(res)
+        init();
+    })
 };
 
 const addRole = () => {
@@ -139,6 +159,14 @@ const removeRole = () => {
 };
 
 const viewDepartments = () => {
+
+    const query = 'SELECT * from department';
+    connection.query(query, (err, res) => {
+        if (err) throw err;
+        console.table(res)
+        init();
+    })
+    
 
 };
 
