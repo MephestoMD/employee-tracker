@@ -105,3 +105,58 @@ const connection = mysql.createConnection({
 
   }
 
+const viewEmployees = () => {
+
+}
+
+const viewEmpByDep = () => {
+    
+}
+
+const viewEmpByMan = () => {
+    
+}
+
+const addEmployee = () => {
+    
+}
+
+const removeEmployee = () => {
+    
+}
+
+const updateEmpRole = () => {
+    
+}
+
+const updateEmpMan = () => {
+    
+}
+
+const viewRoles = () => {
+    
+}
+
+const addRole = () => {
+    
+}
+
+const removeRole = () => {
+    
+}
+
+const viewDepartments = () => {
+    
+}
+
+const addDepartment = () => {
+    
+}
+
+const removeDepartment = () => {
+    
+}
+
+const viewBudget = () => {
+    
+}
