@@ -4,11 +4,33 @@ const connection = require('./config/connection');
 const cTable = require('console.table');
 const Table = require('ascii-art-table');
 
+// Define arrays to hold departments and managers
+let depArray = [];
+let manArray = [];
+
+// Establish connection and initiate the app
 connection.connect((err) => {
     if(err) throw err;
     init();
 });
 
+// Connection queries to populate arrays to hold current departments and managers
+connection.query('SELECT * FROM department', (err, res) => {
+    res.forEach(({name}) => {
+        depArray.push(name);
+    })
+    console.log(depArray);
+});
+
+// Managers will always have a NULL manager_id
+connection.query('SELECT first_name, last_name FROM employee WHERE manager_id IS NULL', (err, res) => {
+    res.forEach(({first_name, last_name}) => {
+        manArray.push(first_name + ' ' + last_name);
+    })
+    console.log(manArray);
+});
+
+// Defining the inquirer prompt question choices for the main menu
 const initQs = { name: 'selection', type: 'list', message: 'Choose an available option from the following list: ',
 choices: [
     'View all employees',
@@ -28,13 +50,8 @@ choices: [
     'Exit'
 ]}
 
+// Function definition for the initial main menu function and choice routing
 const init = () => {
-    Table.create({
-        width : 80,
-        data : [ 'Employee Manager' ]
-    }, function(rendered){
-        // use rendered text
-    });
     inquirer
         .prompt (initQs)
         .then((data) => {
@@ -106,6 +123,7 @@ const init = () => {
 
 };
 
+// Function to display all current employees
 const viewEmployees = () => {
 
     const query = 'SELECT * from employee';
@@ -117,6 +135,8 @@ const viewEmployees = () => {
 };
 
 const viewEmpByDep = () => {
+    // inquirer
+    // .prompt({ name: 'department', 'type')
 
 };
 
