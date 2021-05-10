@@ -4,12 +4,13 @@ const connection = require('./config/connection');
 const cTable = require('console.table');
 const figlet = require('figlet');
 
-// Define arrays to hold available prompt choices for departments, managers, roles and employees
+// Defining arrays to hold available departments, managers, roles, and employees in global scope
 let depArray = [];
 let manArray = [];
 let roleArray = [];
 let empArray = [];
 
+// figlet text to create welcome text graphic
 figlet.text('EMPLOYEE TRACKER', {
     font: 'Big Money-nw',
     horizontalLayout: 'default',
@@ -60,6 +61,8 @@ const init = () => {
 
     // Connection queries to populate arrays to hold current departments, managers, role titles and employees
 connection.query('SELECT * FROM department', (err, res) => {
+    // Reset and populate array to hold available departments
+    depArray = [];
     res.forEach(({name}, index) => {
         depArray[index] = name;
     })
@@ -67,18 +70,24 @@ connection.query('SELECT * FROM department', (err, res) => {
 
 // Managers will always have a NULL manager_id
 connection.query('SELECT first_name, last_name FROM employee WHERE manager_id IS NULL', (err, res) => {
+    // Reset and populate array to hold available managers
+    manArray = [];
     res.forEach(({first_name, last_name}, index) => {
         manArray[index] = (first_name + ' ' + last_name);
     })
 });
 
 connection.query('SELECT * FROM role', (err, res) => {
+    // Reset and populate array to hold available roles
+    roleArray = [];
     res.forEach(({title}, index) => {
         roleArray[index] = title;
     })
 });
 
 connection.query('SELECT first_name, last_name FROM employee', (err, res) => {
+    // Reset and populate array to hold available employees
+    empArray = [];
     res.forEach(({first_name, last_name}, index) => {
         empArray[index] = (first_name + ' ' + last_name);
     })

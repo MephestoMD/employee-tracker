@@ -1,7 +1,9 @@
 
   
   # <a name = "Title">Employee-Tracker</a>
-  <a href = "https://drive.google.com/file/d/1HdfRzSnl2AniHa7n9MdE-p3G4hOXBn0r/view"> Screencastify Video Demonstration </a>
+  <a href = "https://drive.google.com/file/d/1aBr0ImVQnViVrDHFwXp7QTZxbspiCLzX/view"> Screencastify Video Demonstration </a>
+
+  ![employee-tracker menu](./Assets/Emp_Tracker.PNG)
   
   ## <a name = "Description">Description</a>
   
